@@ -33,4 +33,8 @@ public class UserEntity extends BaseEntity {
     @NotBlank
     @Column(unique = true, name = "password")
     private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private PostEntity pinPost;
 }
