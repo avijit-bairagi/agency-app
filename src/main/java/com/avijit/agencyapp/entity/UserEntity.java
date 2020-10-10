@@ -7,6 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -31,13 +33,4 @@ public class UserEntity extends BaseEntity {
     @NotBlank
     @Column(unique = true, name = "password")
     private String password;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_posts",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "post_id", referencedColumnName = "id"))
-    private Set<PostEntity> posts;
 }

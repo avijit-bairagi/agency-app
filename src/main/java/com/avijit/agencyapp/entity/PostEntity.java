@@ -16,26 +16,26 @@ public class PostEntity extends BaseEntity {
 
     @NotBlank
     @Column(columnDefinition = "TEXT", name = "reason")
-    private String description;
+    private String status;
 
     @NotNull
     @Column(name = "post_type")
-    private boolean postType;
+    private String postType;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
-    private LocationEntity locationEntity;
+    private LocationEntity location;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "posts")
-    private Collection<UserEntity> users;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private UserEntity user;
 
     public PostEntity() {
         super();
     }
 
-    public PostEntity(final String description) {
+    public PostEntity(@NotBlank String status) {
         super();
-        this.description = description;
+        this.status = status;
     }
 }
