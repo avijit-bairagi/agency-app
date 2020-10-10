@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<header th:fragment="header(currentPage)">
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top sm-position-relative">
+        <div class="container">
+            <a class="navbar-brand" href="#">Agency App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           th:href="@{/post}">Posts</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="!isAuthenticated()">
+                        <a class="nav-link"
+                           th:href="@{/login}">Login</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link"
+                           th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+</body>
+</html>
