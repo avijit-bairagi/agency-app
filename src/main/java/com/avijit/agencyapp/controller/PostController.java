@@ -8,6 +8,8 @@ import com.avijit.agencyapp.exception.NotFoundException;
 import com.avijit.agencyapp.service.LocationService;
 import com.avijit.agencyapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,7 +31,9 @@ public class PostController {
     PostService postService;
 
     @GetMapping
-    public String getPosts() {
+    public String getPosts(@PageableDefault(page = 0, size = Constants.PAGE_SIZE) Pageable pageable, Model model) {
+
+        model.addAttribute("posts", postService.findByPrivacyType(pageable, Constants.PUBLIC));
 
         return "post/index";
     }
@@ -54,7 +58,7 @@ public class PostController {
             e.printStackTrace();
         }
 
-        return "redirect:/post";
+        return "redirect:/profile";
     }
 
     @GetMapping("/edit/{id}")
@@ -87,7 +91,7 @@ public class PostController {
 
         PostUpdateRequestDto postUpdateRequestDto = new PostUpdateRequestDto(postEntity.getId(), postEntity.getStatus());
         postUpdateRequestDto.setLocationId(String.valueOf(postEntity.getLocation().getId()));
-        postUpdateRequestDto.setPrivacyType(postEntity.getPostType());
+        postUpdateRequestDto.setPrivacyType(postEntity.getPrivacyType());
         return postUpdateRequestDto;
     }
 

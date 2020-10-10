@@ -11,4 +11,6 @@ public interface UserService extends UserDetailsService {
     UserEntity findByEmail(String email) throws NotFoundException;
 
     UserEntity save(RegisterRequestDto registerRequestDto) throws AlreadyExistsException;
+
+    UserEntity update(UserEntity userEntity);
 }

@@ -7,18 +7,29 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Posts | Agency App</title>
+    <title>Profile | Agency App</title>
 </head>
 <body>
-<!-- Add your, site or application content here -->
 <div class="control-banks"
      layout:fragment="content">
 
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-light">
+
+        <h4 th:text="${profile.fullName}"></h4>
+        <h6 class="font-italic" th:text="${profile.email}"></h6>
+
+        <hr>
+
+        <div class="col-md-6 px-0">
+            <h2 class="font-italic" th:text="${profile.pinStatus}"></h2>
+        </div>
+    </div>
+
     <div class="card mt-md-5 mt-3 mb-4 box-shadow-1">
         <div class="card-body">
-            <h5 class="mb-4">Public Posts
+            <h5 class="mb-4">My Posts
                 <a sec:authorize="isAuthenticated()"
-                   th:href="@{post/create'}"
+                   th:href="@{post/create}"
                    class="btn main-btn float-right">Create Post</a>
             </h5>
             <hr>
@@ -41,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <p class="blog-post-meta"th:text="${Post.postAt}"></p>
+                            <a class="blog-post-meta" th:text="${Post.postAt}"></a>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs-4">
@@ -65,6 +76,34 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <a class="blog-post-title" th:text="${Post.location}"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <img th:src="@{/static/img/privacy.png}">
+                                    </div>
+                                    <div class="col-xs-2" style="width:5px">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="blog-post-title" th:text="${Post.privacyType}"></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <a th:href="@{'post/edit/' + ${Post.id}}"
+                                            class="btn btn-primary btn-sm float-right">Edit Post</a>
+                                    </div>
+                                    <div class="col-xs-2" style="width:5px">
+                                    </div>
+                                    <div class="col-xs-4" th:if="${Post.id} != ${profile.pinPostId}">
+                                        <a th:href="@{'profile/pin/' + ${Post.id}}"
+                                            class="btn btn-secondary btn-sm float-right">Pin Post</a>
                                     </div>
                                 </div>
                             </div>

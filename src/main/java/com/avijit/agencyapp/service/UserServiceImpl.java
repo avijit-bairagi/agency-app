@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserEntity update(UserEntity userEntity) {
+        return userRepository.save(userEntity);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Invalid username or password."));
         return new User(user.getEmail(), user.getPassword(), Collections.EMPTY_LIST);
