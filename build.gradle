@@ -49,3 +49,8 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+war {
+	enabled= true
+	archiveFileName= 'agency.war'
+}
