@@ -68,6 +68,10 @@ public class UserServiceImpl implements UserService {
             errorLogger.error(Constants.INVALID_USERNAME_OR_PASSWORD);
             return new UsernameNotFoundException(Constants.INVALID_USERNAME_OR_PASSWORD);
         });
+
+        /**
+         * here i think this app does not need any role base authentication. so i pass that part
+         */
         return new User(user.getEmail(), user.getPassword(), Collections.EMPTY_LIST);
     }
 }
