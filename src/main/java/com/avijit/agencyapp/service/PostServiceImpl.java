@@ -9,6 +9,8 @@ import com.avijit.agencyapp.entity.PostEntity;
 import com.avijit.agencyapp.entity.UserEntity;
 import com.avijit.agencyapp.exception.NotFoundException;
 import com.avijit.agencyapp.repository.PostRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.Authentication;
@@ -32,6 +34,8 @@ public class PostServiceImpl implements PostService {
     @Autowired
     UserService userService;
 
+    private Logger log = LoggerFactory.getLogger("error-logger");
+
     @Override
     public PostEntity save(PostRequestDto postRequestDto) throws NotFoundException {
 
@@ -50,7 +54,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostEntity update(PostUpdateRequestDto postUpdateRequestDto) throws NotFoundException {
 
-        PostEntity postEntity = postRepository.findById(postUpdateRequestDto.getId()).orElseThrow(() -> new NotFoundException("Post not found."));
+        PostEntity postEntity = postRepository.findById(postUpdateRequestDto.getId()).orElseThrow(() -> {
+            log.error(Constants.POST_NOT_FOUND);
+            return new NotFoundException(Constants.POST_NOT_FOUND);
+        });
         postEntity.setPrivacyType(postUpdateRequestDto.getPrivacyType());
         postEntity.setStatus(postUpdateRequestDto.getStatus());
         LocationEntity locationEntity = locationService.findById(Long.parseLong(postUpdateRequestDto.getLocationId()));
@@ -62,7 +69,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostEntity findById(Long id) throws NotFoundException {
-        return postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found."));
+        return postRepository.findById(id).orElseThrow(() -> {
+            log.error(Constants.POST_NOT_FOUND);
+            return new NotFoundException(Constants.POST_NOT_FOUND);
+        });
     }
 
     @Override
@@ -86,7 +96,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void pinPost(Long id) throws NotFoundException {
 
-        PostEntity pinPost = postRepository.findById(id).orElseThrow(() -> new NotFoundException("Post not found."));
+        PostEntity pinPost = postRepository.findById(id).orElseThrow(() -> {
+            log.error(Constants.POST_NOT_FOUND);
+            return new NotFoundException(Constants.POST_NOT_FOUND);
+        });
 
         UserEntity userEntity = getCurrentUser();
 

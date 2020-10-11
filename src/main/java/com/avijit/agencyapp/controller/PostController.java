@@ -7,6 +7,8 @@ import com.avijit.agencyapp.entity.PostEntity;
 import com.avijit.agencyapp.exception.NotFoundException;
 import com.avijit.agencyapp.service.LocationService;
 import com.avijit.agencyapp.service.PostService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -30,6 +32,8 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    private Logger log = LoggerFactory.getLogger("error-logger");
+
     @GetMapping
     public String getPosts(@PageableDefault(page = 0, size = Constants.PAGE_SIZE) Pageable pageable, Model model) {
 
@@ -45,18 +49,14 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public String processPostRequest(@Valid PostRequestDto postRequestDto, BindingResult bindingResult, Model model) {
+    public String processPostRequest(@Valid PostRequestDto postRequestDto, BindingResult bindingResult, Model model) throws NotFoundException {
 
         if (bindingResult.hasErrors()) {
             setPostRequestModelAttribute(model);
             return "post/create";
         }
 
-        try {
-            postService.save(postRequestDto);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
+        postService.save(postRequestDto);
 
         return "redirect:/profile";
     }
