@@ -84,7 +84,7 @@ public class PostController {
 
         postService.update(postUpdateRequestDto);
 
-        return "redirect:/post";
+        return "redirect:/profile";
     }
 
     private PostUpdateRequestDto getPostUpdateRequestDto(PostEntity postEntity) {
