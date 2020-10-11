@@ -14,4 +14,13 @@
 # Instructions
     - replace db crediential (application.yml)
     - execute the shared sql script
-    - import and run the project or deploy the war file at tomcat
+    - import and run the project or deploy the war file (change crediential - application.yml) at tomcat
+    
+# Instructions
+    - replace db crediential (application.yml)
+    - execute the shared sql script
+    - import and run the project or deploy the war file (change crediential - application.yml) at tomcat
+
+# ER-diagram
+
+ ![ER-Diagram](er-diagram.png)
