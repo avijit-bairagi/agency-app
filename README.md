@@ -1,6 +1,7 @@
 ## agency-app
 context path: http://YOUR_PORT:8999/agency/ <br />
-[DB Script](https://github.com/avijit-bairagi/agency-app/blob/main/db/agency.sql)
+[DB Script](https://github.com/avijit-bairagi/agency-app/blob/main/db/agency.sql) <br />
+[Release - 1.0.0](https://github.com/avijit-bairagi/agency-app/releases/tag/1.0.0)
 
 ## bonus works: 
     - Pagination
@@ -13,14 +14,13 @@ context path: http://YOUR_PORT:8999/agency/ <br />
     - JDK: 11
     - MYSQL
 
-# Instructions
-    ### Step 1
-        - replace db crediential at application.yml file (db port, bd server url/ip, user and password)
-        - execute the shared sql script
-        - import and run the project
-    ### Step 2
-        - find the shared war file
-        - before deploy the war file run the db script and replace db crediential (db port, bd server port/ip, user and password)
+# Instructions Step 1
+   1. first find **agency-app\src\main\resources\application.yml** and replace the db credentials (db port, bd server url/ip, user and password)
+   2. execute the shared sql script
+   3. import the project then build and run the project
+# Instructions Step 2
+   1. find war file at release tag or create war using **gradlew war** command
+   2. before deploy the war file run the db script and replace db crediential at **agency\WEB-INF\classes\application.yml** (db port, bd server port/ip, user and password)
 
 # ER-diagram
 
