@@ -3,14 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{layouts/layout :: layout(vCenter='no', currentPage='Post-config')}">
+      layout:decorate="~{layouts/layout :: layout(vCenter='no', currentPage='post')}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Posts | Agency App</title>
 </head>
 <body>
-<!-- Add your, site or application content here -->
+
 <div class="control-banks"
      layout:fragment="content">
 
@@ -82,20 +82,20 @@
                         <li class="page-item "
                             th:classappend="(${posts.pageable.pageNumber <= 0})? 'disabled' : ''">
                             <a class="page-link"
-                               th:href="@{${T(com.bkash.multibank.constant.RouteMappings).Post_CONFIGURATION_URL.toString() + '?page='} + ${posts.pageable.pageNumber - 1} + ${'&size=' + posts.pageable.pageSize}}"
+                               th:href="@{${'post' + '?page='} + ${posts.pageable.pageNumber - 1} + ${'&size=' + posts.pageable.pageSize}}"
                                tabindex="-1" aria-disabled="true">Previous</a>
                         </li>
                         <li class="page-item "
                             th:each="i:${#numbers.sequence(0, posts.totalPages - 1)}"
                             th:classappend="(${i == posts.pageable.pageNumber})? 'active' : ''">
                             <a class="page-link"
-                               th:href="@{${T(com.bkash.multibank.constant.RouteMappings).Post_CONFIGURATION_URL.toString() + '?page='} + ${i} + ${'&size=' + posts.pageable.pageSize}}"
+                               th:href="@{${'post' + '?page='} + ${i} + ${'&size=' + posts.pageable.pageSize}}"
                                th:text="${i + 1}">1</a>
                         </li>
                         <li class="page-item"
                             th:classappend="(${posts.pageable.pageNumber >= posts.totalPages - 1})? 'disabled' : ''">
                             <a class="page-link"
-                               th:href="@{${T(com.bkash.multibank.constant.RouteMappings).Post_CONFIGURATION_URL.toString() + '?page='} + ${posts.pageable.pageNumber + 1} + ${'&size=' + posts.pageable.pageSize}}"
+                               th:href="@{${'post' + '?page='} + ${posts.pageable.pageNumber + 1} + ${'&size=' + posts.pageable.pageSize}}"
                             >Next</a>
                         </li>
                     </ul>
