@@ -14,9 +14,7 @@
             <div class="card mb-5 mt-4 box-shadow-2">
                 <div class="card-body">
                     <h2 class="text-center mb-sm-3 ">Create New Post</h2>
-                    <form th:action="@{/post/create}"
-                          th:object="${postRequestDto}"
-                          method="POST">
+                    <form th:object="${postRequestDto}" th:action="@{/post/create}" method="POST">
 
                         <div class="form-group">
                             <label>Status *</label>

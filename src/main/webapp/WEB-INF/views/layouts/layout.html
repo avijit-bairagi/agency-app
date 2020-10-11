@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/static/css/main.css}">
     <th:block layout:fragment="styles"></th:block>
 </head>
-<body class="" th:fragment="layout(vCenter, currentPage, sessionDeActive)">
+<body class="" th:fragment="layout(vCenter, currentPage)">
 
 <div th:replace='~{layouts/partials/header :: header(currentPage=${currentPage})}'>
     <header>
@@ -30,7 +30,6 @@
     <div class="container-fluid">
         <div layout:fragment="content-fluid"></div>
     </div>
-
 
     <div class="container">
         <div layout:fragment="content"></div>

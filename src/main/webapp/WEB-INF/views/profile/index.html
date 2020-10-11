@@ -52,7 +52,7 @@
                                 </div>
                             </div>
 
-                            <a class="blog-post-meta" th:text="${Post.postAt}"></a>
+                            <small class="mb-2" th:text="${Post.postAt}"></small>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs-4">
@@ -93,13 +93,11 @@
                                 </div>
                             </div>
 
-                            <div class="container">
+                            <div class="container mt-3">
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <a th:href="@{'post/edit/' + ${Post.id}}"
-                                            class="btn btn-primary btn-sm float-right">Edit Post</a>
-                                    </div>
-                                    <div class="col-xs-2" style="width:5px">
+                                            class="btn main-btn btn-sm float-right mr-3">Edit Post</a>
                                     </div>
                                     <div class="col-xs-4" th:if="${Post.id} != ${profile.pinPostId}">
                                         <a th:href="@{'profile/pin/' + ${Post.id}}"
