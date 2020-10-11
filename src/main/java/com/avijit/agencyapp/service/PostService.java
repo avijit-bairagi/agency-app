@@ -22,4 +22,6 @@ public interface PostService {
     Page<PostResponseDto> getALlCurrentUserPosts(Pageable pageable) throws NotFoundException;
 
     void pinPost(Long id) throws NotFoundException;
+
+    void unPinPost() throws NotFoundException;
 }

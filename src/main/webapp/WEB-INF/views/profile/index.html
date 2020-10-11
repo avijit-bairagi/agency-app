@@ -105,6 +105,12 @@
                                         <a th:href="@{'profile/pin/' + ${Post.id}}"
                                             class="btn btn-secondary btn-sm float-right">Pin Post</a>
                                     </div>
+
+                                    <div class="col-xs-4" th:if="${Post.id} == ${profile.pinPostId}">
+                                        <a th:href="@{profile/unpin/}"
+                                           class="btn btn-secondary btn-sm float-right">Unpin Post</a>
+                                    </div>
+
                                 </div>
                             </div>
 

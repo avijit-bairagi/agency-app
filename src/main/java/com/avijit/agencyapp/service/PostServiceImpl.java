@@ -108,6 +108,16 @@ public class PostServiceImpl implements PostService {
         userService.update(userEntity);
     }
 
+    @Override
+    public void unPinPost() throws NotFoundException {
+
+        UserEntity userEntity = getCurrentUser();
+
+        userEntity.setPinPost(null);
+
+        userService.update(userEntity);
+    }
+
     private List<PostResponseDto> getResponseDtos(Page<PostEntity> postEntities) {
 
         List<PostResponseDto> responseDtos = new ArrayList<>();

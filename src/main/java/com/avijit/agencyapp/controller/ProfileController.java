@@ -44,6 +44,14 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/unpin")
+    public String doUnPinPost() throws NotFoundException {
+
+        postService.unPinPost();
+
+        return "redirect:/profile";
+    }
+
     private ProfileResponseDto getProfileResponse(Principal principal) throws NotFoundException {
 
         UserEntity userEntity = userService.findByEmail(principal.getName());
