@@ -13,12 +13,12 @@
 
 # Instructions
     ### Step 1
-        - replace db crediential (db port, bd server url/ip, user and password)
+        - replace db crediential at application.yml file (db port, bd server url/ip, user and password)
         - execute the shared sql script
-        - import and run the project or deploy the war file (change crediential - application.yml) at tomcat
+        - import and run the project
     ### Step 2
-        - execute the shared sql script
-        - deploy the shared war file at tomcat also replace db crediential (db port, bd server port/ip, user and password)
+        - find the shared war file
+        - before deploy the war file run the db script and replace db crediential (db port, bd server port/ip, user and password)
 
 # ER-diagram
 
