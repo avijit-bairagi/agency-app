@@ -30,11 +30,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private Logger log = LoggerFactory.getLogger("error-logger");
+    private final Logger errorLogger = LoggerFactory.getLogger("error-logger");
+    private final Logger debugLogger = LoggerFactory.getLogger("debug-logger");
 
     public UserEntity findByEmail(String email) throws NotFoundException {
         return userRepository.findByEmail(email).orElseThrow(() -> {
-            log.error(Constants.USER_NOT_FOUND);
+            errorLogger.error(Constants.USER_NOT_FOUND);
             return new NotFoundException(Constants.USER_NOT_FOUND);
         });
     }
@@ -42,12 +43,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity save(RegisterRequestDto registerRequestDto) throws AlreadyExistsException {
 
+        debugLogger.info("save() : enter");
+
         if (userRepository.findByEmail(registerRequestDto.getEmail()).isPresent()) {
             throw new AlreadyExistsException(Constants.EMAIL_ALREADY_EXISTS);
         }
 
         UserEntity userEntity = modelMapper.map(registerRequestDto, UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(registerRequestDto.getPassword()));
+
+        debugLogger.info("save() : exit");
 
         return userRepository.save(userEntity);
     }
@@ -60,7 +65,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> {
-            log.error(Constants.INVALID_USERNAME_OR_PASSWORD);
+            errorLogger.error(Constants.INVALID_USERNAME_OR_PASSWORD);
             return new UsernameNotFoundException(Constants.INVALID_USERNAME_OR_PASSWORD);
         });
         return new User(user.getEmail(), user.getPassword(), Collections.EMPTY_LIST);

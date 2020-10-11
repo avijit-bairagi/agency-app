@@ -25,7 +25,8 @@ public class AuthController {
     @Autowired
     UserService userService;
 
-    private Logger log = LoggerFactory.getLogger("error-logger");
+    private Logger errorLogger = LoggerFactory.getLogger("error-logger");
+    private Logger debugLogger = LoggerFactory.getLogger("debug-logger");
 
     @GetMapping("/login")
     public String getLogin(LoginRequestDto loginRequestDto) {
@@ -53,6 +54,8 @@ public class AuthController {
     @PostMapping("/register")
     public String doRegister(@Valid RegisterRequestDto registerRequestDto, BindingResult bindingResult) {
 
+        debugLogger.info("doRegister() : enter");
+
         if (bindingResult.hasErrors()) {
             return "auth/register";
         }
@@ -65,10 +68,13 @@ public class AuthController {
         try {
             userService.save(registerRequestDto);
         } catch (AlreadyExistsException e) {
-            log.error(e.getMessage());
+            debugLogger.info("doRegister() : {}", e.getLocalizedMessage());
+            errorLogger.error(e.getMessage());
             bindingResult.rejectValue("email", "email", e.getMessage());
             return "auth/register";
         }
+
+        debugLogger.info("doRegister() : exit");
 
         return "redirect:/login";
     }
