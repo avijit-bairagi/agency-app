@@ -30,6 +30,7 @@ public class UserEntity extends BaseEntity {
     private String email;
 
     @JsonIgnore
+    @ToString.Exclude
     @NotBlank
     @Column(unique = true, name = "password")
     private String password;

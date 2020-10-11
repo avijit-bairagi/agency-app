@@ -1,9 +1,7 @@
 package com.avijit.agencyapp.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -23,9 +21,13 @@ public class RegisterRequestDto {
     @NotBlank
     private String email;
 
+    @JsonIgnore
+    @ToString.Exclude
     @Size(min = 2, max = 50, message = "password must be greater than 6 characters")
     private String password;
 
+    @JsonIgnore
+    @ToString.Exclude
     @NotBlank
     private String confirmPassword;
 }
