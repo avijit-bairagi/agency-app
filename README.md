@@ -12,3 +12,6 @@
     - MYSQL
 
 # Instructions
+    - replace db crediential (application.yml)
+    - execute the shared sql script
+    - import and run the project or deploy the war file at tomcat
