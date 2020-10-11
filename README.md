@@ -26,14 +26,20 @@
  
  # UI
 
+ Login
  ![Login](img-ui/login.jpg)
  
+ Register
  ![Registration](img-ui/register.jpg)
   
+  Create post
  ![Create Post](img-ui/create-post.jpg)
  
+ Edit post
  ![Edit Post](img-ui/edit-post.jpg)
   
+  Profile
  ![Profile](img-ui/profile.jpg)
  
- ![Public posts](img-ui/public-post.jpg)
+ Public posts
+ ![Public posts](img-ui/public-posts.jpg)
