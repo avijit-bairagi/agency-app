@@ -9,3 +9,6 @@ spring:
     show-sql: true
 server:
   port: 8999
+  error:
+    whitelabel:
+      enabled: false
