@@ -9,6 +9,8 @@ spring:
     show-sql: true
 server:
   port: 8999
+  servlet:
+    context-path: /agency
   error:
     whitelabel:
       enabled: false
