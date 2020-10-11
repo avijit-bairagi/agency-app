@@ -1,0 +1,35 @@
+<configuration>
+    <property name="LOG_PATTERN" value="Timestamp=%d{yyyy-MM-dd HH:mm:ss.SSS Z}|%p|ModuleName=agency-app|%m%n" />
+    <property name="APP_LOG_ROOT" value="/logs" />
+     
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="errorlog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${APP_LOG_ROOT}/error.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${APP_LOG_ROOT}/error-%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <logger name="error-logger" level="ERROR">
+        <appender-ref ref="errorlog" />
+        <appender-ref ref="console" />
+    </logger>
+ 
+     <root level="info">
+        <appender-ref ref="console" />
+     </root>
+      
+</configuration>
